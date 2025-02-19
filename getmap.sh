@@ -180,7 +180,9 @@ fi
 
 
 # This presupposes the user has at least 10 GB of RAM. If they do not, ImageMagick will throw a "memory allocation failed" error.
-montage -verbose -limit area 0 -limit memory 10GB -limit map 10GB -monitor -mode concatenate *_*.jpg -tile "${TOT}x${TOT}" "DayZ_${VER}_${MAP}_map_${TOT}x${TOT}_${TYP}.jpg"
+ls -1 *_*.jpg > image_list.txt
+magick montage -verbose -limit area 0 -limit memory 10GB -limit map 10GB -monitor -mode concatenate @image_list.txt -tile "${TOT}x${TOT}" "DayZ_${VER}_${MAP}_map_${TOT}x${TOT}_${TYP}.jpg"
+rm image_list.txt
 
 
 printf "\nMap generation complete! Opening image.\n"
