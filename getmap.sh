@@ -150,13 +150,21 @@ done
 
 printf "Done.\nInitiating download (this may take a while)\n"
 
-aria2c --dir=./tmp --input-file=TilesToDownload.txt -c --auto-file-renaming=false --allow-overwrite=false --max-tries=0 --retry-wait=3 --timeout=5 --max-concurrent-downloads=400 --connect-timeout=60 --max-connection-per-server=16 --split=16 --min-split-size=1M --download-result=full
-
-# max-concurrent-downloads (getmap 7 sat) speed tests:
-# 300: 1:13
-# 500: 1:12
-# 600: 1:11
-# 800: Errors
+aria2c --dir=./tmp \
+    --input-file=TilesToDownload.txt \
+    -c \
+    --auto-file-renaming=false \
+    --allow-overwrite=false \
+    --max-tries=5 \
+    --retry-wait=5 \
+    --timeout=30 \
+    --max-concurrent-downloads=100 \
+    --connect-timeout=60 \
+    --max-connection-per-server=4 \
+    --split=4 \
+    --min-split-size=1M \
+    --download-result=full \
+    --max-overall-download-limit=5M
 
 printf "Downloads complete!\n"
 
